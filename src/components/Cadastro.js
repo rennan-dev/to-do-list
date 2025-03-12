@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './App.css';
 
 function Cadastro() {
   const [nome, setNome] = useState('');
@@ -9,8 +10,8 @@ function Cadastro() {
 
   const handleCadastro = async (e) => {
     e.preventDefault();
-    
-    const response = await fetch('https://react.rennan-alves.com/cadastro.php', {
+
+    const response = await fetch('', {
       method: 'POST',
       body: new URLSearchParams({
         nome,
@@ -25,7 +26,7 @@ function Cadastro() {
   };
 
   return (
-    <div>
+    <div className="container">
       <h2>Cadastro</h2>
       <form onSubmit={handleCadastro}>
         <input type="text" placeholder="Nome" value={nome} onChange={(e) => setNome(e.target.value)} />
@@ -34,7 +35,7 @@ function Cadastro() {
         <input type="password" placeholder="Confirmar Senha" value={confirmarSenha} onChange={(e) => setConfirmarSenha(e.target.value)} />
         <button type="submit">Cadastrar</button>
       </form>
-      <p>{mensagem}</p>
+      {mensagem && <p className={`mensagem ${mensagem === 'Cadastro bem-sucedido' ? 'sucesso' : ''}`}>{mensagem}</p>}
       <p>Já tem conta? <a href="/login">Faça login</a></p>
     </div>
   );
